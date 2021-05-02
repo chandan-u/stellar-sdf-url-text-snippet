@@ -59,6 +59,21 @@
 
 
 
+## dependencies explanation:
+
+ 1. chosed Flask because it is lightweight webserver. For our usecase we dont have much heavy lifting so flask makes perfect sense.
+
+ 2. Couldn't implement SSL certify in time. But installed openssl as part of dependencies and the webserver should be able to start if passed the arguments --certify
+
+ 3. This way it could handle https requests. 
+
+ 4. Chose sqllite because it is lightweight and can be easily created (single file) and teardown. For our simple use case this makes sense
+    And python comes with default sqlite3 library
+ 
+ 
+
+
+
 
  
 
