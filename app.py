@@ -1,3 +1,17 @@
+"""
+  simple app to create text snippets that can be accessed back with urls
+
+  __author__: {
+    'name': 'chandan uppuluri',
+     'email': 'chandan.uppuluri@gmail.com'
+  
+ }
+
+"""
+
+
+
+
 from flask import Flask
 from contextlib import closing
 from flask import request
@@ -35,7 +49,9 @@ def index():
             Access them later with URL until they are expired"
 
 
-
+"""
+create_snippet functinality
+"""
 
 @app.route('/snippets', methods=['POST'])
 def create_snippet():
@@ -48,8 +64,10 @@ def create_snippet():
         expires_in = data['expires_in']
         snippet = data['snippet']
 
+        # calc expiration timestamp and sqlite can handle python datetime objects
         expires_at = datetime.datetime.now() + datetime.timedelta(seconds=expires_in)
-
+        
+        # response payload
         response = {
             'url': flask.url_for("index", _external=True) + 'snippets/' + name,
             'name': name,
@@ -82,9 +100,10 @@ def get_snippet(name):
 
     con = get_db_connection()
     try:
+        # get snippet  data from db using name 
         data = con.execute("SELECT snippetName, snippetExpTime, snippet FROM snippets where snippetName='{0}'".format(name)).fetchone()
         
-
+        # check snippet expiry
         if data['snippetExpTime'] <= datetime.datetime.now().__str__():                 # TODO:bad idea to  compare strings though its valid for same formats
 
             response = {
