@@ -30,9 +30,13 @@
 #### setup sqlite file DB
    `flask initdb`  	
 
+#### setup ssl cert openssl
+
+    ` openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+
 #### Run the following steps to get the webserver  started (the webserver starts at http://127.0.0.1:5000)
 
-   `flask run` 
+   `flask run --cert=cert.pem --key=key.pem` 
 
 
 
@@ -70,7 +74,7 @@
  4. Chose sqllite because it is lightweight and can be easily created (single file) and teardown. For our simple use case this makes sense
     And python comes with default sqlite3 library
  
- 
+
 
 
 
